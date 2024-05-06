@@ -1,0 +1,46 @@
+Leetcode 143
+
+An optimal Golang solution for Leetcode 143 including a Time and Space Complexity Analysis. 
+
+Show me an example of a unit test function that makes use of the "Table-Driven Test" pattern to test the optimal Golang solution to leetcode 143.
+
+Also, give me a Time and Space Complexity Analysis for said optimal solution.
+
+As well as a unit test function that employs a  "Table-Driven Test Pattern".
+
+Show me a pseudocode version for the following Golang code:
+
+Give me an overview of how this particular solution to leetcode 143 is achieved:
+
+Perform the same type of analysis and demonstrate how it is different from what we have discussed so far:
+
+///
+
+Discuss the similarities and differences between this version and the previous one:
+
+// reorderList solves the problem by making use of only a stack.
+func reorderList(head *Node) {
+	if head == nil {
+		return
+	}
+
+	// Push all node pointer onto a stack
+	stack := []*Node{}
+	current := head
+	for current != nil {
+		stack = append(stack, current)
+		current = current.Next
+	}
+
+	// Reallocate node pointers sequentially from the back
+	current = head
+	var fwdPtr *Node
+	for i := len(stack) - 1; i > (len(stack)-1)/2; i-- {
+		fwdPtr = current.Next
+		current.Next = stack[i]
+		current.Next.Next = fwdPtr
+		current = fwdPtr
+	}
+	current.Next = nil // terminate Tail appropriately
+}
+

@@ -1,0 +1,5 @@
+Leetcode 20
+
+Show me an optimal Golang solution for Leetcode 20 and produce a Test Function that makes use of the "Table-Driven Test" pattern to unit test its functionality. Also, give me a Time and Space Complexity Analysis for said optimal solution.
+
+An optimal Golang solution for Leetcode 20 including a Time and Space Complexity Analysis. As well as a unit test function that employs a  "Table-Driven Test Pattern".

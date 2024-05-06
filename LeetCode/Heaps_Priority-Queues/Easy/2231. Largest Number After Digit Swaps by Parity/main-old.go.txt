@@ -1,0 +1,116 @@
+package main
+
+import (
+	"fmt"
+	"math"
+	"sort"
+)
+
+// > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > >
+
+/*
+2231. Largest Number After Digit Swaps by Parity
+Easy
+
+You are given a positive integer num. You may swap any two digits of num that
+have the same parity (i.e. both odd digits or both even digits).
+
+Return the largest possible value of num after any number of swaps.
+
+
+Example 1:
+
+Input: num = 1234
+Output: 3412
+Explanation: Swap the digit 3 with the digit 1, this results in the number 3214.
+Swap the digit 2 with the digit 4, this results in the number 3412.
+Note that there may be other sequences of swaps but it can be shown that 3412
+is the largest possible number.
+Also note that we may not swap the digit 4 with the digit 1 since they are of
+different parities.
+
+Example 2:
+
+Input: num = 65875
+Output: 87655
+Explanation: Swap the digit 8 with the digit 6, this results in the number 85675.
+Swap the first digit 5 with the digit 7, this results in the number 87655.
+Note that there may be other sequences of swaps but it can be shown that 87655
+is the largest possible number.
+
+
+Constraints:
+
+    1 <= num <= 109
+*/
+
+/*
+Intuitive Understanding:
+------------------------
+
+*/
+
+// < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < <
+
+//-------------------------------------
+
+// -------------------------------------
+
+/* // Implement a Max-Heap:
+type maxHeap []int
+
+func (h maxHeap) Len() int           { return len(h) }
+func (h maxHeap) Less(i, j int) bool { return h[i] > h[j] }
+func (h maxHeap) Swap(i, j int)      { h[i], h[j] = h[j], h[i] }
+func (h *maxHeap) Push(val any)      { (*h) = append((*h), val.(int)) }
+func (h *maxHeap) Pop() any {
+	defer func() { (*h) = (*h)[:len(*h)-1] }()
+	return (*h)[len(*h)-1]
+} */
+
+// Use math gymnastics + sort.Ints
+func largestInteger(num int) int {
+
+	// how many digits does the number have?
+	numOfDigits := int(math.Log10(float64(num))) + 1
+
+	// separate digits into evens & odds.
+	var odds, evens []int
+	for i := 1; i <= numOfDigits; i++ {
+		divisor := math.Pow10(numOfDigits - i)
+		digit := int(num / int(divisor))
+		if i%2 == 0 {
+			evens = append(evens, digit)
+		} else {
+			odds = append(odds, digit)
+		}
+		num -= (digit * int(divisor))
+	}
+	// reverse sort each digit list
+	sort.Sort(sort.Reverse(sort.IntSlice(odds)))
+	sort.Sort(sort.Reverse(sort.IntSlice(evens)))
+
+	// reconstitute the number
+	var result int
+	for i := 1; i <= numOfDigits; i++ {
+		multiplier := int(math.Pow10(numOfDigits - i))
+		if i%2 == 0 {
+			result = result + (multiplier * evens[i/2-1])
+		} else {
+			result = result + (multiplier * odds[(i-1)/2])
+		}
+	}
+	return result
+}
+
+//-------------------------------------
+
+func main() {
+
+	num := 1234
+	fmt.Println("Input number = ", num)
+	fmt.Println("Largest Integer = ", largestInteger(num))
+
+}
+
+//*-*

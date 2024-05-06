@@ -1,0 +1,112 @@
+package main
+
+import (
+	"fmt"
+	"os"
+
+	"github.com/cloudemprise/leetcode572/tree"
+)
+
+var treeType string = "binary-tree"
+var insertType string = "breadth-first"
+var transversalType string = "Breadth-First"
+
+//-------------------------------------
+
+// SOLUTION 2: Using a Closure.
+
+// recursive structural and quantitative comparison
+func isSameTree(p *tree.TreeNode, q *tree.TreeNode) bool {
+	if p == nil && q == nil { // structural check
+		return true
+	}
+	if p == nil || q == nil { // uncorrelated nodes
+		return false
+	}
+	if p.Val != q.Val { // values check
+		return false
+	}
+	return isSameTree(p.Left, q.Left) && isSameTree(p.Right, q.Right)
+}
+
+//*-*
+
+// recursive closure pre-order transversal.
+func isSubtree(root *tree.TreeNode, subRoot *tree.TreeNode) bool {
+
+	var isFound bool = false
+	var preOrder func(*tree.TreeNode)
+
+	preOrder = func(node *tree.TreeNode) {
+		if node != nil && !isFound {
+			isFound = isSameTree(node, subRoot)
+			preOrder(node.Left)
+			preOrder(node.Right)
+		}
+	}
+
+	preOrder(root)
+	return isFound
+}
+
+//-------------------------------------
+
+///
+
+func main() {
+
+	var aTree = tree.New()
+	nums1 := []int{1, 2, 3, 4, 5, 6, 7}
+
+	fmt.Println("A 2D printout of a", treeType, "using a", insertType)
+	fmt.Println("insertion algo is as follows: ")
+
+	for _, num := range nums1 {
+		fmt.Printf(">%v ", num)
+		aTree.Insert(num)
+	}
+	fmt.Printf("\n")
+
+	aTree.Print2dTree(os.Stdout)
+
+	fmt.Println()
+	fmt.Println("With a", transversalType, "transversal as follows:")
+	fmt.Printf("[")
+	aTree.PrintTree(os.Stdout)
+	fmt.Println(" ]")
+
+	//*-*
+	fmt.Printf("\n//-------------------------------------\n\n")
+	//*-*
+
+	var bTree = tree.New()
+	//nums2 := []int{1, 2, 3, 4, 5, 6, 7}
+	//nums2 := []int{2, 4, 5, 7}
+	nums2 := []int{2, 4, 5}
+
+	fmt.Println("A 2D printout of a", treeType, "using a", insertType)
+	fmt.Println("insertion algo is as follows: ")
+
+	for _, num := range nums2 {
+		fmt.Printf(">%v ", num)
+		bTree.Insert(num)
+	}
+	fmt.Printf("\n")
+
+	bTree.Print2dTree(os.Stdout)
+
+	fmt.Println()
+	fmt.Println("With a", transversalType, "transversal as follows:")
+	fmt.Printf("[")
+	bTree.PrintTree(os.Stdout)
+	fmt.Println(" ]")
+
+	//myTree.Reset()
+	//*-*
+	fmt.Printf("\n//-------------------------------------\n\n")
+	//*-*
+
+	fmt.Println("Does the Secondary tree S exists withing the Primary tree T = ", isSubtree(aTree.Root, bTree.Root))
+}
+
+//*-*

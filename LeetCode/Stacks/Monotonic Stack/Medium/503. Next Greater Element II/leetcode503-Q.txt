@@ -1,0 +1,109 @@
+
+https://leetcode.com/problems/next-greater-element-ii/description/
+
+--------------------------------------------------------------------------------
+
+503. Next Greater Element II
+Medium
+
+
+Given a circular integer array 'nums', 
+i.e. the next element of nums[nums.length - 1] is nums[0], 
+return the next greater number for every element in nums.
+
+The next greater number of a number x is the first greater number to its traversing-order next in the array, which means you could search circularly to find its next greater number. If it doesn't exist, return -1 for this number.
+
+
+Example 1:
+==========
+
+Input: nums = [1,2,1]
+Output: [2,-1,2]
+
+Explanation: The first 1's next greater number is 2;
+The number 2 can't find next greater number.
+The second 1's next greater number needs to search circularly, which is also 2.
+
+
+Example 2:
+==========
+
+Input: nums = [1,2,3,4,3]
+Output: [2,3,4,-1,4]
+
+
+Constraints:
+
+    1 <= nums.length <= 104
+    -109 <= nums[i] <= 109
+
+
+--------------------------------------------------------------------------------
+
+Explanation
+===========
+
+
+1. The function initializes a result slice of length `n`, where `n` is the
+ length of the input slice `nums`.
+
+2. The function initializes an empty stack to keep track of the indices of the
+ elements in `nums`.
+
+3. The function iterates over the input slice `nums` twice, starting from the
+ end of the slice. This is done to handle the circular nature of the input slice.
+
+4. For each element in `nums`, the function pops elements from the stack that
+ are less than or equal to the current element, and calculates the next greater
+ element for each popped element.
+
+5. If the current iteration is within the length of the input slice `nums`, the
+ function stores the next greater element for the current element in the result
+ slice. Otherwise, the function discards the next greater element for the
+ current element.
+
+6. The function pushes the index of the current element onto the stack.
+
+7. The function returns the result slice.
+
+The time complexity of this function is O(N), where N is the length of the input
+ slice `nums`. This is because the function uses a single loop to iterate over
+ the input slice twice, and the operations inside the loop take constant time.
+
+The space complexity of this function is O(N), where N is the length of the
+ input slice `nums`. This is because the function uses a stack to keep track of
+ the indices of the elements in `nums`, and the stack can have at most N
+ elements. Additionally, the function creates an output slice of length N to
+ store the next greater elements.
+
+Citations:
+[1] https://leetcode.com/problems/next-greater-element-i/
+[2] https://www.studytonight.com/post/finding-next-greater-element-for-every-element-in-an-array
+[3] https://wulc.me/search.xml
+[4] https://www.techiedelight.com/next-greater-element/
+[5] https://leetcode.com/problems/next-greater-element-ii/
+[6] https://www.enjoyalgorithms.com/blog/find-next-greater-element/
+
+
+--------------------------------------------------------------------------------
+
+
+func nextGreaterElements(nums []int) []int {
+
+}
+
+This is the expression to use to loop twice around an array, i.e. a circular array:
+
+let ln=len(n)
+
+for i := i%ln; i < 2*ln; i++ {
+
+}
+
+let ln=len(n)
+
+i = 0%ln
+i = 1%ln
+...
+i = (n-1)%ln
+i = n%ln = 0

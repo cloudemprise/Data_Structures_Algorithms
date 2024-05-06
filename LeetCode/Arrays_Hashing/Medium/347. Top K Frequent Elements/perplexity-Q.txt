@@ -1,0 +1,5 @@
+Leetcode 347. Show me an optimal Golang solution and provide a Test Function that makes use of the "Table-Driven Test" pattern to test its functionality. Also, give me a Time and Space Complexity Analysis for said optimal solution.
+
+
+Show me an optimal Golang solution for Leetcode 347 that makes use of a Max Heap Inparticular using the standard library container/heap package, i.e implement the heap.Interface in your solution.
+

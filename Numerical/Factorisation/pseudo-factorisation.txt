@@ -1,0 +1,45 @@
+/*  Finding (Prime) Factors  - PseudoCode
+
+    Complexity : O(sqrt N) for small N.
+
+    This Algo is similar to the "Sieve of Eratosthenes"
+    but not as effcient.
+
+*/
+
+Int[]: FindFactors(Int: number)
+
+    Int[]: factors
+
+    // Pull out factors of 2.
+    While (number Mod 2 == 0)
+
+        factors.Add(2)
+        number = number / 2
+
+    End While
+
+    // Look for odd factors.
+    Int: i = 3
+    Int: max_factor = Sqrt(number)
+
+    While (i <= max_factor)
+
+        // Pull out factors of i.
+        While (number Mod i == 0)
+
+            // i is a factor. Add it to the List.
+            factors.Add(i)
+
+            // Divide number by i.
+            number = number / i
+
+            // Set a new upper bound.
+            max_factor = Sqrt(number)
+
+        End While
+
+        // Check next possible odd factor.
+        i = i + 2
+
+    End While

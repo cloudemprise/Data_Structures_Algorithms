@@ -1,0 +1,291 @@
+package main
+
+// > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > >
+
+/*
+104. Maximum Depth of Binary Tree
+Easy
+10.7K
+174
+Companies
+
+Given the root of a binary tree, return its maximum depth.
+
+A binary tree's maximum depth is the number of nodes along the longest path
+from the root node down to the farthest leaf node.
+
+
+Example 1:
+
+Input: root = [3,9,20,null,null,15,7]
+Output: 3
+
+Example 2:
+
+Input: root = [1,null,2]
+Output: 2
+
+
+Constraints:
+
+    The number of nodes in the tree is in the range [0, 104].
+    -100 <= Node.val <= 100
+*/
+
+/**
+ * Definition for a binary tree node.
+ * type TreeNode struct {
+ *     Val int
+ *     Left *TreeNode
+ *     Right *TreeNode
+ * }
+ */
+
+/*  Time Complexity: 0(n)
+----------------------
+In-order, Pre-order, and Post-order traversals are Depth-First traversals.
+
+For a Graph, the complexity of a Depth First Traversal is O(n + m), where n is
+the number of nodes, and m is the number of edges.
+
+Since a Binary Tree is also a Graph, the same applies here. The complexity of
+each of these Depth-first traversals is O(n+m).
+
+Since the number of edges that can originate from a node is limited to 2 in the
+case of a Binary Tree, the maximum number of total edges in a Binary Tree is
+n-1, where n is the total number of nodes.
+
+The complexity then becomes O(n + n-1), which is O(n).
+
+Space Complexity: O(h)
+----------------------
+where h = tree height */
+
+// < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < < <
+
+/* type Node struct {
+	Val   int
+	Left  *Node
+	Right *Node
+} */
+
+//*-*
+
+/* // This is just a short fancy recursive solution.
+func invertTree(root *Node) *Node {
+	if root != nil {
+		root.Left, root.Right = invertTree(root.Right), invertTree(root.Left)
+	}
+	return root
+} */
+
+//*-*
+
+/* // Recursive Pre-Order Transversal + Node Swap
+// Prefer to remember this one.
+func invertTree(root *Node) *Node {
+	if root == nil { // base case
+		return root
+	}
+	// swap nodes around
+	root.Left, root.Right = root.Right, root.Left
+	invertTree(root.Left)
+	invertTree(root.Right)
+	return root
+} */
+
+/* // A recursive attempt
+func maxDepth(root *TreeNode) int {
+
+	var depth int
+	PreOrderTransversal(root, depth)
+	return depth
+
+}
+
+func PreOrderTransversal(n *TreeNode, depth int) {
+	if n == nil { // base case
+		return
+	}
+	depth++
+	fmt.Printf(" %v", n.Val)
+	fmt.Printf(" %v", depth)
+	PreOrderTransversal(n.Left, depth)
+	PreOrderTransversal(n.Right, depth)
+} */
+
+//*-*
+
+/* // Iterative Pre-Order Transversal + Swap
+func invertTree(root *Node) *Node {
+	if root == nil {
+		return nil
+	}
+	var stack []*Node
+	stack = append(stack, root)
+	for len(stack) > 0 {
+
+		tmp := stack[len(stack)-1]
+		stack = stack[:len(stack)-1]
+		tmp.Left, tmp.Right = tmp.Right, tmp.Left
+
+		if tmp.Right != nil {
+			stack = append(stack, tmp.Right)
+		}
+
+		if tmp.Left != nil {
+			stack = append(stack, tmp.Left)
+		}
+	}
+	return root
+} */
+
+//-------------------------------------
+
+/* // An iterative attempt (FAILED - DELETE WHEN DONE)
+func maxDepth(root *TreeNode) int {
+
+	var maxDepth int
+
+	if root == nil {
+		return 0
+	}
+
+	// Create a stack ADT and push root
+	var stack []*TreeNode
+	stack = append(stack, root)
+
+	for len(stack) > 0 {
+
+		// Pop stack
+		tmp := stack[len(stack)-1]
+		stack = stack[:len(stack)-1]
+
+		// can modify something at this level
+
+		if tmp.Right != nil {
+			stack = append(stack, tmp.Right)
+			if len(stack) > maxDepth {
+				maxDepth = len(stack)
+			}
+		}
+
+		if tmp.Left != nil {
+			stack = append(stack, tmp.Left)
+			if len(stack) > maxDepth {
+				maxDepth = len(stack)
+			}
+		}
+
+	}
+	return maxDepth
+} */
+
+/* // Breadth-First iterative print-out using a queue.
+func (n *node) printNodeBreadthFirst(w io.Writer) {
+
+	var maxDepth int
+
+	var queue []*node
+	queue = append(queue, n)
+
+	for len(queue) > 0 {
+
+		tmp := queue[0]
+		queue = queue[1:]
+
+		fmt.Fprintf(w, " %v", tmp.data)
+
+		if tmp.left != nil {
+			queue = append(queue, tmp.left)
+		} else if len(queue) > maxDepth {
+			maxDepth = len(queue)
+		}
+		if tmp.right != nil {
+			queue = append(queue, tmp.right)
+		} else if len(queue) > maxDepth {
+			maxDepth = len(queue)
+		}
+
+	}
+} */
+
+//-------------------------------------
+
+/* func maxDepth(root *TreeNode) int {
+	var maxDepth int
+
+	if root == nil {
+		return 0
+	}
+
+	var stack []*TreeNode
+	var tmp *TreeNode = root
+
+	for len(stack) > 0 || tmp != nil {
+		if tmp != nil {
+			stack = append(stack, tmp)
+			tmp = tmp.Left
+		} else {
+			if maxDepth < len(stack) {
+				maxDepth = len(stack)
+			}
+			tmp = stack[len(stack)-1]
+			stack = stack[:len(stack)-1]
+			tmp = tmp.Right
+		}
+	}
+	return maxDepth - 1
+} */
+
+/* // A stack ADT is used to in-order transverse a binary-tree.
+func (n *node) printNodeInOrder(w io.Writer) {
+	if n == nil { // empty tree corner case.
+		return
+	}
+
+	s := stack.NewStack() // Declare a new Stack.
+
+	var index *node = n // Copy root node.
+
+	// Loop while Stack in not empty OR
+	// node is not a leaf node.
+	for !s.IsEmpty() || index != nil {
+		// While node is not a leaf
+		if index != nil {
+			s.Push(index)      // push on Stack.
+			index = index.left // move left.
+		} else { // we're at the leaf node now.
+			value, ok := s.Pop().(*node) // type assertion
+			if !ok {
+				log.Fatal("inOrder() type assertion")
+			} else {
+				index = value
+				fmt.Fprintf(w, " %v", index.data)
+				index = index.right
+			}
+		}
+	}
+} */
+
+//-------------------------------------
+
+// 1. recursive solution
+func maxDepth(root *TreeNode) int {
+	if root == nil {
+		return 0
+	}
+	return max(maxDepth(root.Left), maxDepth(root.Right)) + 1
+}
+
+func max(x int, y int) int {
+	if x > y {
+		return x
+	}
+	return y
+}
+
+func main() {
+
+	PrintResult()
+}

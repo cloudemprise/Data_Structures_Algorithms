@@ -1,0 +1,18 @@
+Leetcode 19
+
+Show me an optimal Golang solution for Leetcode 19 including a detailed Time and Space Complexity Analysis. 
+
+Show me an example of a unit test function that makes use of the "Table-Driven Test" pattern to test the optimal Golang solution to leetcode 19.
+
+Also, give me a Time and Space Complexity Analysis for said optimal solution.
+
+As well as a unit test function that employs a  "Table-Driven Test Pattern".
+
+Show me a pseudocode version for the following Golang code:
+
+Give me an overview of how this particular solution to leetcode 19 is achieved:
+
+Perform the same type of analysis and demonstrate how it is different from what we have discussed so far:
+
+///
+

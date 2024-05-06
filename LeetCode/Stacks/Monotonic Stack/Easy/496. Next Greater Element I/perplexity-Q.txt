@@ -1,0 +1,9 @@
+Leetcode 496
+
+An optimal Golang solution for Leetcode 496 including a Time and Space Complexity Analysis. 
+
+Show me an example of a unit test function that makes use of the "Table-Driven Test" pattern to test the optimal Golang solution to leetcode 496.
+
+Also, give me a Time and Space Complexity Analysis for said optimal solution.
+
+As well as a unit test function that employs a  "Table-Driven Test Pattern".

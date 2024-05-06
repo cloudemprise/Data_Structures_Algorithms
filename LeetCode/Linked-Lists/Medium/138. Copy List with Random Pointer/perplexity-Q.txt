@@ -1,0 +1,75 @@
+Leetcode 21
+
+An optimal Golang solution for Leetcode 21 including a Time and Space Complexity Analysis. 
+
+Show me an example of a unit test function that makes use of the "Table-Driven Test" pattern to test the optimal Golang solution to leetcode 21.
+
+Also, give me a Time and Space Complexity Analysis for said optimal solution.
+
+As well as a unit test function that employs a  "Table-Driven Test Pattern".
+
+Show me a pseudocode version for the following Golang code:
+
+Give me an overview of how this particular solution to leetcode 21 is achieved:
+
+Perform the same type of analysis and demonstrate how it is different from what we have discussed so far:
+
+///
+
+Explain the logic of this particular solution to leetcode 21:
+
+func copyRandomList(head *Node) *Node {
+	if head == nil {
+		return nil
+	}
+	
+	length := 0
+	var headNew *Node = &Node{Val: head.Val} // initialise
+	length++
+	old, new := head, headNew
+	for old.Next != nil {
+		old = old.Next                 // Move old forward.
+		newNode := &Node{Val: old.Val} // Create a new node.
+		new.Next = newNode             // Build new link.
+		new = new.Next                 // Move new forward.
+		length++
+	} 
+
+	// Construct stacks of each list and of length.
+	stackNew := make([]*Node, length)
+	stackOld := make([]*Node, length)
+	old, new = head, headNew
+	for i := 0; i < length; i++ {
+		stackOld[i] = old
+		stackNew[i] = new
+		old = old.Next
+		new = new.Next
+	}
+
+	mapping := make(map[int]int)
+	for i, n := range stackOld {
+
+		if n.Random != nil {
+
+			current := n.Random
+			idx := 0
+			for current != nil {
+
+				idx++
+				current = current.Next
+			}
+			mapping[i] = length - idx
+		}
+	}
+
+	for i, n := range stackOld {
+		if n.Random == nil {
+			stackNew[i].Random = nil
+		} else {
+			stackNew[i].Random = stackNew[mapping[i]]
+		}
+	}
+
+	return headNew
+}
+

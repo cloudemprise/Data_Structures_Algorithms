@@ -1,0 +1,17 @@
+// Perform a down-heap or heapify-down operation for a max-heap
+// A: an array representing the heap, indexed starting at 1
+// i: the index to start at when heapifying down
+MaxHeapify(A, i):
+    Left := 2xi
+    Right := 2xi + 1
+    Largest := i
+    
+    IF Left <= length(A) AND A[Left] > A[Largest] THEN:
+        Largest := Left
+
+    IF Right <= length(A) AND A[Right] > A[Largest] THEN:
+        Largest := Right
+    
+    IF Largest != i THEN:
+        SWAP A[i] and A[Largest]
+        Max-Heapify(A, Largest)

@@ -1,0 +1,13 @@
+function bucketSort(array, k) is
+    buckets ← new array of k empty lists
+    M ← 1 + the maximum key value in the array
+    for i = 0 to length(array) - 1 do
+        insert array[i] into buckets[floor(k * array[i] / M)]
+    for i = 0 to k - 1 do
+        sort buckets[i]
+    concatenate the lists buckets[0], buckets[1], ..., buckets[k - 1] together
+
+
+// A: an array representing ...
+// k: ...
+bucketSort(A, k)

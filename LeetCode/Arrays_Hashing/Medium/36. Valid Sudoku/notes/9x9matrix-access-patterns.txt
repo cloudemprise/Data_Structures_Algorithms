@@ -1,0 +1,48 @@
+func main() {
+
+	//
+	const (
+		lenRow = 9
+		lenCol = 9
+	)
+
+	var board [lenRow][lenCol]int
+	var counter int
+
+	for row := 0; row < 9; row++ {
+		for col := 0; col < 9; col++ {
+			counter++
+			board[row][col] = row*9 + (col + 1)
+		}
+	}
+
+	// access pattern 1, horizontal:
+	for row := 0; row < 9; row++ {
+		for col := 0; col < 9; col++ {
+			fmt.Printf("%02v ", board[row][col])
+		}
+		fmt.Println()
+	}
+	fmt.Println()
+
+	// access pattern 2, vertical:
+	for row := 0; row < 9; row++ {
+		for col := 0; col < 9; col++ {
+			fmt.Printf("%02v ", board[col][row])
+		}
+		fmt.Println()
+	}
+	fmt.Println()
+
+	// access pattern 3, inner square.
+	for row := 0; row < 9; row++ {
+		for col := 0; col < 9; col++ {
+			column := ((col % 3) + (3 * row)) % 9
+			line := (col / 3) + 3*(row/3)
+			fmt.Printf("%02v ", board[line][column])
+		}
+		fmt.Println()
+	}
+	fmt.Println()
+
+}

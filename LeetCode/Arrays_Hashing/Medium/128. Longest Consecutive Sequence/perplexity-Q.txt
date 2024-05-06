@@ -1,0 +1,5 @@
+Leetcode 128. 
+
+Show me an optimal Golang solution for Leetcode 128 and produce a Test Function that makes use of the "Table-Driven Test" pattern to unit test its functionality. Also, give me a Time and Space Complexity Analysis for said optimal solution.
+
+An optimal Golang solution for Leetcode 128 with a Time and Space Complexity Analysis. Include a unit test that makes use of the "Table-Driven Test Pattern".

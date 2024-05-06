@@ -1,0 +1,21 @@
+
+func productExceptSelf(nums []int) []int:
+    n := Length(nums)
+    var result [n]int
+    var mul int
+
+    // Step 1
+    mul := 1
+    for i from 0 to n-1:
+        result[i] = mul
+        mul = mul * nums[i]
+
+    // Step 2
+    mul := 1
+    for i from n-1 to 0:
+        result[i] = result[] * mul
+        mul = mul * nums[i]
+
+    return result
+
+    

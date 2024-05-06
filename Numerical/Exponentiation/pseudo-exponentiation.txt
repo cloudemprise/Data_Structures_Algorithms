@@ -1,0 +1,26 @@
+/*  Efficient Exponentiation Computation  - PseudoCode
+
+    Complexity : 
+
+    
+    
+*/
+
+Int: Exponentiate(Int: value, Int: exponent)
+
+    Int: result = 1
+    Int: factor = value
+
+    While (exponent != 0)
+
+        If (exponent Mod 2 == 1) Then
+            result *= factor
+
+        factor *= factor
+        exponent /= 2
+
+    End While
+
+    Return result
+
+End Exponentiate

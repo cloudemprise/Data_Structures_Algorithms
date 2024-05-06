@@ -1,0 +1,31 @@
+func solveUsingBinarySearch(strs *[]string) string {
+	var isPossible func(prefixLen int) bool
+	isPossible = func(prefixLen int) bool {
+		for i := 1; i < len(*strs); i++ {
+			for j := 0; j < prefixLen; j++ {
+				if (*strs)[i][j] != (*strs)[0][j] {
+					return false
+				}
+			}
+		}
+		return true
+	}
+	low, high, ans := 0, math.MaxInt, 0
+	for _, str := range *strs {
+		high = int(math.Min(float64(len(str)), float64(high)))
+	}
+	for low <= high {
+		mid := (low + high) / 2
+		if isPossible(mid) {
+			ans = mid
+			low = mid + 1
+		} else {
+			high = mid - 1
+		}
+	}
+	return (*strs)[0][:ans]
+}
+
+func longestCommonPrefix(strs []string) string {
+	return solveUsingBinarySearch(&strs)
+}

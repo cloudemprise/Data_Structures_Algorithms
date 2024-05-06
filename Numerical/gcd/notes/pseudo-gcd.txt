@@ -1,0 +1,21 @@
+/*  Greatest Common Divisor - PseudoCode
+
+    Complexity : log B
+
+    GCD(A,B) = GCD(B,A Mod B)
+    
+*/
+
+Int: GCD(Int: A, Int B)
+
+    While (B != 0)
+
+        Int: Remainder = A Mod B
+        A = B       // GCD(A,B) = GCD(B, Remainder)
+        B = Remainder
+
+    End While
+
+    Return A
+
+End GCD

@@ -1,0 +1,22 @@
+func topKFrequent(nums []int, k int) []int {
+    // Count the frequency of all nums.
+    freqs := make(map[int]int)
+    for _, num := range nums {
+        freqs[num]++
+    }
+
+    // Create a list of slices to act as buckets.
+    buckets := make([][]int, len(nums)+1)
+
+    // Place the numbers in their respective bucket based on their frequency.
+    for num, freq := range freqs {
+        buckets[freq] = append(buckets[freq], num)
+    }
+
+    // Extract the k most frequent elements from the buckets.
+    var result []int
+    for i := len(buckets) - 1; i >= 0 && len(result) < k; i-- {
+        result = append(result, buckets[i]...)
+    }
+    return result
+}

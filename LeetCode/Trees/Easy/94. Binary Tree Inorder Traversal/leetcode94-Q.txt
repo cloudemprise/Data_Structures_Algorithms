@@ -1,0 +1,53 @@
+
+94. Binary Tree In-order Traversal - Easy
+
+Given the root of a binary tree, return the in-order traversal of its nodes' 
+values.
+ 
+
+Example 1:
+
+Input: root = [1,null,2,3]
+Output: [1,3,2]
+
+Example 2:
+
+Input: root = []
+Output: []
+
+Example 3:
+
+Input: root = [1]
+Output: [1]
+ 
+
+Constraints:
+
+    The number of nodes in the tree is in the range [0, 100].
+    -100 <= Node.val <= 100
+
+ 
+Follow up: Recursive solution is trivial, could you do it iteratively?
+
+
+
+
+Time Complexity: 0(n)
+----------------------
+In-order, Pre-order, and Post-order traversals are Depth-First traversals.
+
+For a Graph, the complexity of a Depth First Traversal is O(n + m), where n is
+the number of nodes, and m is the number of edges.
+
+Since a Binary Tree is also a Graph, the same applies here. The complexity of
+each of these Depth-first traversals is O(n+m).
+
+Since the number of edges that can originate from a node is limited to 2 in the
+case of a Binary Tree, the maximum number of total edges in a Binary Tree is
+n-1, where n is the total number of nodes.
+
+The complexity then becomes O(n + n-1), which is O(n).
+
+Space Complexity: O(h)
+----------------------
+where h = tree height

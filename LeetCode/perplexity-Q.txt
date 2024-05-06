@@ -1,0 +1,1 @@
+Show me an optimal Golang solution for leetcode XXX and provide a Test Function that makes use of the "Table-Driven Test" pattern to test its functionality. Also, give me a Time and Space Complexity Analysis for said optimal solution.

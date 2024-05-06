@@ -1,0 +1,156 @@
+Satisfy constraint:
+lo < mid < hi where hi > lo
+
+1. if hi  < lo : swap , therefore hi > lo
+2. if mid < lo : swap , therefore mid > lo
+3. if mid > hi : swap , therefore hi < mid
+pivot = mid
+
+mid := (hi + lo) / 2
+
+if n[hi] < n[lo] {
+	n[hi], n[lo] = n[lo], n[hi]
+}
+if n[mid] < n[lo] {
+	n[mid], n[lo] = n[lo], n[mid]
+}
+if n[mid] > n[hi] {
+	n[mid], n[hi] = n[hi], n[mid]
+}
+
+// pivot is now n[mid], move to n[lo]
+n[mid], n[lo] = n[lo], n[mid]
+
+// Select 1st element as pivot value.
+pivot := n[lo]
+
+//-------------------------------------
+
+// Chose pivot value median-of-three
+mid := (hi + lo) / 2
+// Constraint:
+// mid < lo < hi where hi > mid
+// OR
+// hi < lo < mid where mid > hi
+if n[hi] > n[mid] {
+	if n[lo] < n[mid] {
+		n[lo], n[mid] = n[mid], n[lo]
+	}
+	if n[lo] > n[hi] {
+		n[lo], n[hi] = n[hi], n[lo]
+	}
+} else { // mid > hi
+	if n[lo] < n[hi] {
+		n[lo], n[hi] = n[hi], n[lo]
+	}
+	if n[lo] > n[mid] {
+		n[lo], n[mid] = n[mid], n[lo]
+	}
+}
+
+// *-*
+
+// Chose pivot value median-of-three
+mid := (hi + lo) / 2
+// For Hoare partition:
+// Constraints: mid < lo < hi where hi > mid
+if n[hi] < n[mid] {
+	n[hi], n[mid] = n[mid], n[hi]
+}
+if n[mid] > n[lo] {
+	n[mid], n[lo] = n[lo], n[mid]
+}
+if n[hi] < n[lo] {
+	n[hi], n[lo] = n[lo], n[hi]
+}
+
+// *-*
+
+hi < lo < mid where mid > hi
+
+if n[mid] < n[hi] {
+	n[mid], n[hi] = n[hi], n[mid]
+}
+if n[hi] > n[lo] {
+	n[hi], n[lo] = n[lo], n[hi]
+}
+if n[mid] < n[lo] {
+	n[mid], n[lo] = n[lo], n[mid]
+}
+
+
+
+//-------------------------------------
+
+
+// https://stackoverflow.com/questions/7559608/median-of-three-values-strategy
+
+/* def MedianOfThree(arr, left, right):
+	   mid = (left + right)/2
+	   if arr[right] < arr[left]:
+	       Swap(arr, left, right)
+	   if arr[mid] < arr[left]:
+	       Swap(arr, mid, left)
+	   if arr[right] < arr[mid]:
+	       Swap(arr, right, mid)
+	   return mi */
+
+//-------------------------------------
+
+// https://en.wikipedia.org/wiki/Quicksort#Hoare_partition_scheme
+// Median-of-three code snippet for Lomuto partition: 
+	mid := ⌊(lo + hi) / 2⌋
+	if A[mid] < A[lo]
+		swap A[lo] with A[mid]
+	if A[hi] < A[lo]
+		swap A[lo] with A[hi]
+	if A[mid] < A[hi]
+		swap A[mid] with A[hi]
+	pivot := A[hi]
+
+	// ---
+
+	// Go Code:
+	// Chose pivot value median-of-three
+	mid := (hi + lo) / 2
+	// for Lomuto partition:
+	if n[mid] < n[lo] {
+		n[mid], n[lo] = n[lo], n[mid]
+	}
+	if n[hi] < n[lo] {
+		n[hi], n[lo] = n[lo], n[hi]
+	}
+	if n[mid] < n[hi] {
+		n[mid], n[hi] = n[hi], n[mid]
+	}
+	// Swap to lo element as pivot index
+	n[hi], n[lo] = n[lo], n[hi]
+
+	// *-*
+
+	// Replacing A[hi] with A[lo]:
+
+	/* mid := ⌊(lo + hi) / 2⌋
+	if A[mid] < A[hi]
+		swap A[hi] with A[mid]
+	if A[lo] < A[hi]
+		swap A[hi] with A[lo]
+	if A[mid] < A[lo]
+		swap A[mid] with A[lo]
+	pivot := A[lo] */
+
+
+
+//-------------------------------------
+
+
+	
+
+	/* int medianThree(int a, int b, int c) {
+		if ((a > b) ^ (a > c))
+			return a;
+		else if ((b < a) ^ (b < c))
+			return b;
+		else
+			return c;
+	} */

@@ -1,0 +1,32 @@
+Here are a set of functions that use recursion the find the first and second middle nodes of a linked list. Refactors these functions to clarify the logic and make them more readable with modifying the input parameter list.
+
+// get1stMiddleNode returns the 1st middle node of a singly linked list using recursion.
+func get1stMiddleNode(head *Node) *Node {
+	return find1stMiddle(head, head)
+}
+
+// findMiddle is a helper function that recursively finds the first middle node of a singly linked list.
+func find1stMiddle(slow, fast *Node) *Node {
+	if fast == nil || fast.Next == nil {
+		return slow
+	}
+	if fast.Next.Next == nil {
+		return slow
+	}
+	return find1stMiddle(slow.Next, fast.Next.Next)
+}
+
+// get2ndMiddleNode returns the 2nd middle node of a singly linked list using recursion.
+func get2ndMiddleNode(head *Node) *Node {
+	return find2ndMiddle(head, head)
+}
+
+// findMiddle is a helper function that recursively finds the second middle node of a singly linked list.
+func find2ndMiddle(slow, fast *Node) *Node {
+	if fast == nil || fast.Next == nil {
+		return slow
+	}
+	return find2ndMiddle(slow.Next, fast.Next.Next)
+}
+
+

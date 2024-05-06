@@ -1,0 +1,24 @@
+/*  Finding Prime Factors  - PseudoCode
+
+    Complexity : O(
+
+    Fermat Primality Test <- Fermat's Little Theorem
+
+
+*/
+
+Bool: IsProbablePrime(Int: p, Int: num_iter)
+
+    // Perform probability test for num_iter iterations.
+    For test = 1 to num_iter
+
+        // Pick a pseudorandom number  1 < n < p
+        If (n^[p-1] Mod p != 1) Then 
+            Return false        // p is NOT Prime
+    
+    Next test
+
+    // There is a 1 / 2^[num_iter] probability that p is not prime.
+    Return true
+
+End IsProbablePrime
