@@ -32,6 +32,18 @@ func (s *Stack[T]) Pop() (T, bool) {
 	}
 }
 
+/* func (s *Stack[T]) Pop() (T, bool) {
+	if len(s.items) == 0 {
+		v := new(T)
+		return *v, false
+	}
+
+	v := s.items[len(s.items)-1]
+	s.items = s.items[:len(s.items)-1]
+
+	return v, true
+} */
+
 ///
 
 func (s *Stack[T]) Peek() (any, bool) {
